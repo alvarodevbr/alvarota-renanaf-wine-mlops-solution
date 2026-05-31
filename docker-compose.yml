@@ -26,6 +26,7 @@ services:
       start_period: 60s
 
   api:
+    platform: linux/amd64
     image: ghcr.io/gilvanveras/wine-mlops-solution/wine-classifier:latest
     pull_policy: always
     ports:
