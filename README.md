@@ -9,26 +9,24 @@ Implementa o fluxo MLOps completo sobre o dataset Wine (sklearn): coleta → tre
 ## Pré-requisitos
 
 - Python 3.11 instalado (ou deixe o `uv` instalar).
-- [`uv`](https://docs.astral.sh/uv/) instalado:
-
+- `[uv](https://docs.astral.sh/uv/)` instalado:
   ```powershell
   # Windows
   powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
   ```
-
   ```bash
   # macOS / Linux
   curl -LsSf https://astral.sh/uv/install.sh | sh
   ```
-
 - Docker Desktop (opcional, para os passos com contêineres).
-- [`just`](https://github.com/casey/just) (opcional — facilita os atalhos do `justfile`).
+- `[just](https://github.com/casey/just)` (opcional — facilita os atalhos do `justfile`).
 
 ---
 
 ## Setup em 30 segundos
 
 > **Windows / PowerShell:** defina `PYTHONIOENCODING=utf-8` antes de executar qualquer comando — o MLflow 3.x imprime emojis no log de fim de run que crasham no `cp1252` padrão.
+>
 > ```powershell
 > $env:PYTHONIOENCODING = "utf-8"
 > ```
@@ -65,7 +63,7 @@ uv run python -m src.data
 uv run python -m src.train --n_estimators 200 --max_depth 8
 ```
 
-Abra o MLflow UI em <http://127.0.0.1:5000>:
+Abra o MLflow UI em [http://127.0.0.1:5000](http://127.0.0.1:5000):
 
 - novo run em **Experiments → wine-classifier** com 4 métricas e 2 parâmetros;
 - nova versão em **Models → wine-classifier**.
@@ -75,7 +73,7 @@ Anote o `run_id` impresso no console.
 ### Tarefa 3 — Avaliar no conjunto de teste
 
 ```bash
-uv run python -m src.evaluate --run-id <RUN_ID>
+uv run python -m src.evaluate --run-id dbd443793b8142cd96b87643745123ec
 ```
 
 Verifique:
@@ -127,7 +125,7 @@ curl -s -X POST http://localhost:8000/predict \
 # {"class":0,"proba":0.94,"all_probs":[0.94,0.05,0.01],"champion_version":2}
 ```
 
-Documentação automática em <http://localhost:8000/docs>.
+Documentação automática em [http://localhost:8000/docs](http://localhost:8000/docs).
 
 ### Tarefa 6 — Deploy automático
 
@@ -228,11 +226,13 @@ wine-mlops-solution/
 
 ## Variáveis de ambiente
 
-| Variável | Default | O quê |
-|---|---|---|
-| `MLFLOW_TRACKING_URI` | `http://127.0.0.1:5000` | Endereço do MLflow tracking server |
-| `PROMOTION_THRESHOLD` | `0.01` | Ganho mínimo de F1 macro para promover o challenger |
-| `MLFLOW_SKIP` | (vazio) | `1` pula o teste de API no pytest |
+
+| Variável              | Default                 | O quê                                               |
+| --------------------- | ----------------------- | --------------------------------------------------- |
+| `MLFLOW_TRACKING_URI` | `http://127.0.0.1:5000` | Endereço do MLflow tracking server                  |
+| `PROMOTION_THRESHOLD` | `0.01`                  | Ganho mínimo de F1 macro para promover o challenger |
+| `MLFLOW_SKIP`         | (vazio)                 | `1` pula o teste de API no pytest                   |
+
 
 ---
 
@@ -245,3 +245,4 @@ rm -rf mlruns/ models/*.pkl
 
 # Suba o MLflow de novo e refaça bootstrap_champion
 ```
+
